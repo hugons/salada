@@ -68,8 +68,6 @@ export default function Game({ puzzle }: GameProps) {
   }
 
   const handleClick = (row: number, col: number) => {
-    console.log('Clicked:', row, col);
-    console.log('Current path before:', currentPath);
     const clickedCell = [row, col];
     if (currentPath.length === 0) {
       setCurrentPath([clickedCell]);
@@ -78,11 +76,6 @@ export default function Game({ puzzle }: GameProps) {
       const isSameAsLast = lastCell[0] === row && lastCell[1] === col;
       const isAdjacent = Math.abs(row - lastCell[0]) <= 1 && Math.abs(col - lastCell[1]) <= 1;
       const indexOfClicked = currentPath.findIndex(([r, c]) => r === row && c === col);
-
-      console.log('Last cell:', lastCell);
-      console.log('Is same as last:', isSameAsLast);
-      console.log('Is adjacent:', isAdjacent);
-      console.log('Index of clicked:', indexOfClicked);
 
       if (isSameAsLast) {
         // If the last cell is clicked again, remove it (backtrack)
@@ -98,7 +91,6 @@ export default function Game({ puzzle }: GameProps) {
         setCurrentPath([clickedCell]);
       }
     }
-    console.log('Current path after:', currentPath);
   };
 
   const handleClearPath = () => {
@@ -156,7 +148,8 @@ export default function Game({ puzzle }: GameProps) {
       <h1 className="text-2xl font-bold mb-4">{puzzle.title}</h1>
       <div className="mb-4">Tempo: {Math.floor(time / 60)}:{(time % 60).toString().padStart(2, '0')}</div>
       <div className="mb-4">Melhor tempo: {bestTime ? `${Math.floor(bestTime / 60)}:${(bestTime % 60).toString().padStart(2, '0')}` : 'N/A'}</div>
-      <div className="game-grid" style={{ gridTemplateColumns: `repeat(${puzzle.size}, 80px)` }}>
+      <div className="flex justify-center">
+        <div className="game-grid" style={{ gridTemplateColumns: `repeat(${puzzle.size}, 70px)` }}>
         {grid.map((row, r) =>
           row.map((letter, c) => (
             <div
@@ -173,6 +166,7 @@ export default function Game({ puzzle }: GameProps) {
             </div>
           ))
         )}
+        </div>
       </div>
       <div className="mb-4">
         {currentPath.length > 0 && (
@@ -180,6 +174,9 @@ export default function Game({ puzzle }: GameProps) {
             <span className="mr-2">Selecionado: {currentPath.map(([r, c]) => grid[r][c]).join('')}</span>
             <button onClick={handleClearPath} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-sm">
               Limpar
+            </button>
+            <button onClick={handleVerify} className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded text-sm ml-2">
+              Verificar
             </button>
           </div>
         )}
