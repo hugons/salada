@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import { Raleway } from 'next/font/google'
+import { Cairo } from 'next/font/google'
 import './globals.css'
 
-const raleway = Raleway({
+const cairo = Cairo({
   weight: ['400', '700'],
   subsets: ['latin'],
   display: 'swap',
@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-PT" className={raleway.className}>
+    <html lang="pt-PT" className={cairo.className}>
       <body>
         {children}
         <script src="/register-sw.js" defer></script>

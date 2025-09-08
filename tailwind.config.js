@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        raleway: ['Raleway', 'sans-serif'],
+        cairo: ['Cairo', 'sans-serif'],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -16,9 +16,13 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        d3d3d3: '#D3D3D3',
-        f2f2f2: '#f2f2f2',
-        'cell-selected': '#60A5FA', /* Define custom color for selected cells */
+        cellbg: '#ffffff',
+        emerald: '#4CAF50',
+        mint: '#C8E6C9',
+        seafoam: '#B2DFDB',
+        sage: '#A5D6A7',
+        bg: '#F5FFFA',
+        'cell-selected': '#B2DFDB', /* Define custom color for selected cells */
       }
     },
   },
