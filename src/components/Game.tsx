@@ -20,8 +20,20 @@ export default function Game({ puzzle }: GameProps) {
     const interval = setInterval(() => {
       setTime(t => t + 1)
     }, 1000)
-    return () => clearInterval(interval)
-  }, [])
+
+    const handleGlobalTouchMove = (e: TouchEvent) => {
+      if (isDragging) {
+        e.preventDefault()
+      }
+    }
+
+    document.addEventListener('touchmove', handleGlobalTouchMove, { passive: false })
+
+    return () => {
+      clearInterval(interval)
+      document.removeEventListener('touchmove', handleGlobalTouchMove)
+    }
+  }, [isDragging])
 
   useEffect(() => {
     if (foundWords.size === puzzle.words.length) {
