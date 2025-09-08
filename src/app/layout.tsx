@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import { Roboto } from 'next/font/google'
+import { Raleway } from 'next/font/google'
 import './globals.css'
 
-const roboto = Roboto({
+const raleway = Raleway({
   weight: ['400', '700'],
   subsets: ['latin'],
   display: 'swap',
@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-PT" className={roboto.className}>
+    <html lang="pt-PT" className={raleway.className}>
       <body>
         {children}
         <script src="/register-sw.js" defer></script>
