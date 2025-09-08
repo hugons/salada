@@ -136,19 +136,38 @@ export default function Game({ puzzle }: GameProps) {
   }
 
   const handleClick = (row: number, col: number) => {
+    const clickedCell = [row, col];
     if (currentPath.length === 0) {
-      setCurrentPath([[row, col]])
+      setCurrentPath([clickedCell]);
     } else {
-      const last = currentPath[currentPath.length - 1]
-      const dr = Math.abs(row - last[0])
-      const dc = Math.abs(col - last[1])
-      if (dr <= 1 && dc <= 1 && !(dr === 0 && dc === 0)) {
-        setCurrentPath(prev => [...prev, [row, col]])
+      const lastCell = currentPath[currentPath.length - 1];
+      const isAdjacent = Math.abs(row - lastCell[0]) <= 1 && Math.abs(col - lastCell[1]) <= 1 && !(row === lastCell[0] && col === lastCell[1]);
+      const isAlreadyInPath = currentPath.some(([r, c]) => r === row && c === col);
+
+      if (isAdjacent) {
+        if (isAlreadyInPath) {
+          // If it's the last cell, remove it (backtrack)
+          if (lastCell[0] === row && lastCell[1] === col) {
+            setCurrentPath(prev => prev.slice(0, -1));
+          } else {
+            // If an earlier cell in the path is clicked, truncate the path to that point
+            const index = currentPath.findIndex(([r, c]) => r === row && c === col);
+            setCurrentPath(prev => prev.slice(0, index + 1));
+          }
+        } else {
+          // Add to path if adjacent and not already in path
+          setCurrentPath(prev => [...prev, clickedCell]);
+        }
       } else {
-        setCurrentPath([[row, col]])
+        // If not adjacent, start a new path
+        setCurrentPath([clickedCell]);
       }
     }
-  }
+  };
+
+  const handleClearPath = () => {
+    setCurrentPath([]);
+  };
 
   const handleVerify = () => {
     // Check if path matches any word
@@ -227,8 +246,11 @@ export default function Game({ puzzle }: GameProps) {
       </div>
       <div className="mb-4">
         {currentPath.length > 0 && (
-          <div className="mt-2">
-            Selecionado: {currentPath.map(([r, c]) => grid[r][c]).join('')}
+          <div className="mt-2 flex items-center">
+            <span className="mr-2">Selecionado: {currentPath.map(([r, c]) => grid[r][c]).join('')}</span>
+            <button onClick={handleClearPath} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-sm">
+              Limpar
+            </button>
           </div>
         )}
       </div>
