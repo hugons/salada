@@ -18,7 +18,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-PT">
-      <body>{children}</body>
+      <body>
+        {children}
+        <script src="/register-sw.js" defer></script>
+      </body>
     </html>
   )
 }

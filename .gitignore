@@ -13,7 +13,9 @@
 /dist
 /.next
 /out
-/public 
+/public/
+!public/manifest.json
+!public/service-worker.js
 
 # misc
 .DS_Store
