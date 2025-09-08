@@ -1,0 +1,9 @@
+{
+  "name": "New Salad",
+  "short_name": "NewSalad",
+  "description": "Jogo de palavras inspirado no Word Salad",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "bears-001",
+  "title": "Words That Go With 'Bear'",
+  "theme": "Bear",
+  "size": 4,
+  "grid": "PLAS\nOARM\nNKET\nADDZ",
+  "words": [
+    {
+      "key": "arms",
+      "display": "ARMS",
+      "path": [[0,2],[1,2],[1,3],[0,3]]
+    },
+    {
+      "key": "polar",
+      "display": "POLAR",
+      "path": [[0,0],[1,0],[0,1],[0,2],[1,2]]
+    },
+    {
+      "key": "market",
+      "display": "MARKET",
+      "path": [[1,3],[0,2],[1,2],[2,1],[2,2],[2,3]]
+    },
+    {
+      "key": "teddy",
+      "display": "TEDDY",
+      "path": [[2,3],[2,2],[3,1],[3,2],[3,3]]
+    },
+    {
+      "key": "panda",
+      "display": "PANDA",
+      "path": [[0,0],[1,1],[2,0],[3,1],[3,0]]
+    },
+    {
+      "key": "koala",
+      "display": "KOALA",
+      "path": [[2,1],[1,0],[1,1],[0,1],[0,2]]
+    },
+    {
+      "key": "trap",
+      "display": "TRAP",
+      "path": [[2,3],[1,2],[1,1],[0,0]]
+    }
+  ]
+}

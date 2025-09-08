@@ -1,0 +1,29 @@
+{
+  "id": "rios-004",
+  "title": "Rios do Mundo",
+  "theme": "Rios",
+  "size": 4,
+  "grid": "NILE\nLONA\nUREB\nALRO",
+  "words": [
+    {
+      "key": "nilo",
+      "display": "NILO",
+      "path": [[0,0],[0,1],[1,0],[1,1]]
+    },
+    {
+      "key": "lena",
+      "display": "LENA",
+      "path": [[0,2],[0,3],[1,2],[1,3]]
+    },
+    {
+      "key": "ural",
+      "display": "URAL",
+      "path": [[2,0],[2,1],[3,0],[3,1]]
+    },
+    {
+      "key": "ebro",
+      "display": "EBRO",
+      "path": [[2,2],[2,3],[3,2],[3,3]]
+    }
+  ]
+}

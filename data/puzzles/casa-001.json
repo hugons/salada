@@ -1,0 +1,39 @@
+{
+  "id": "casa-001",
+  "title": "Objetos de Casa",
+  "theme": "casa",
+  "size": 4,
+  "grid": "MESA\nELAR\nSOFA\nARAZ",
+  "words": [
+    {
+      "key": "mesa",
+      "display": "MESA",
+      "path": [[0,0], [0,1], [0,2], [0,3]]
+    },
+    {
+      "key": "sofa",
+      "display": "SOFÁ",
+      "path": [[2,0], [2,1], [2,2], [2,3]]
+    },
+    {
+      "key": "lar",
+      "display": "LAR",
+      "path": [[1,1], [1,2], [1,3]]
+    },
+    {
+      "key": "sal",
+      "display": "SAL",
+      "path": [[0,2], [1,2], [1,1]]
+    },
+    {
+      "key": "ela",
+      "display": "ELA",
+      "path": [[1,0], [1,1], [1,2]]
+    },
+    {
+      "key": "asa",
+      "display": "ASA",
+      "path": [[1,2], [0,2], [0,3]]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "terras-001",
+  "title": "Terras de Portugal",
+  "theme": "Terras",
+  "size": 4,
+  "grid": "DAOA\nPORP\nIENI\nUASV",
+  "words": [
+    {
+      "key": "dornes",
+      "display": "DORNES",
+      "path": [[0,0],[1,1],[1,2],[2,2],[2,1],[3,2]]
+    },
+    {
+      "key": "nisa",
+      "display": "NISA",
+      "path": [[2,2],[2,3],[3,2],[3,1]]
+    },
+    {
+      "key": "piodao",
+      "display": "PIODAO",
+      "path": [[1,0],[2,0],[1,1],[0,0],[0,1],[0,2]]
+    },
+    {
+      "key": "serpa",
+      "display": "SERPA",
+      "path": [[3,2],[2,1],[1,2],[1,3],[0,3]]
+    },
+    {
+      "key": "viseu",
+      "display": "VISEU",
+      "path": [[3,3],[2,3],[3,2],[2,1],[3,0]]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "capitais-001",
+  "title": "Capitais do Mundo",
+  "theme": "Capitais",
+  "size": 4,
+  "grid": "PARE\nBIMO\nALSY\nCTOK",
+  "words": [
+    {
+      "key": "paris",
+      "display": "PARIS",
+      "path": [[0,0],[0,1],[0,2],[1,1],[2,2]]
+    },
+    {
+      "key": "tokyo",
+      "display": "TOKYO",
+      "path": [[3,1],[3,2],[3,3],[2,3],[1,3]]
+    },
+    {
+      "key": "cairo",
+      "display": "CAIRO",
+      "path": [[3,0],[2,0],[1,1],[0,2],[1,3]]
+    },
+    {
+      "key": "rome",
+      "display": "ROME",
+      "path": [[0,2],[1,3],[1,2],[0,3]]
+    },
+    {
+      "key": "lima",
+      "display": "LIMA",
+      "path": [[2,1],[1,1],[1,2],[0,1]]
+    },
+    {
+      "key": "oslo",
+      "display": "OSLO",
+      "path": [[1,3],[2,2],[2,1],[3,2]]
+    },
+    {
+      "key": "rabat",
+      "display": "RABAT",
+      "path": [[0,2],[0,1],[1,0],[2,0],[3,1]]
+    }
+  ]
+}
