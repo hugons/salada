@@ -40,11 +40,11 @@ export default function Game({ puzzle }: GameProps) {
     }
   }, [puzzle.id])
 
-  const handleMouseDown = (row: number, col: number) => {
+  const handleMouseDown = (e: React.MouseEvent, row: number, col: number) => {
+    e.preventDefault()
     setIsDragging(true)
     setCurrentPath([[row, col]])
   }
-
   const handleMouseEnter = (row: number, col: number) => {
     if (isDragging) {
       setCurrentPath(prev => [...prev, [row, col]])
@@ -75,6 +75,7 @@ export default function Game({ puzzle }: GameProps) {
   }
 
   const handleTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault()
     if (!isDragging) return
     const touch = e.touches[0]
     const element = document.elementFromPoint(touch.clientX, touch.clientY)
@@ -199,7 +200,7 @@ export default function Game({ puzzle }: GameProps) {
                 isInFoundPath(r, c) ? 'bg-green-500' : /* Use a more distinct green for found cells */
                 'bg-d3d3d3' /* Use custom class for default cell background */
               } ${!isLetterVisible(r, c) ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-              onMouseDown={() => handleMouseDown(r, c)}
+              onMouseDown={(e) => handleMouseDown(e, r, c)}
               onMouseEnter={() => handleMouseEnter(r, c)}
               onMouseUp={handleMouseUp}
               onTouchStart={(e) => handleTouchStart(e, r, c)}
