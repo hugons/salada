@@ -69,8 +69,9 @@ export default function Game({ puzzle }: GameProps) {
 
   const handleClick = (row: number, col: number) => {
     const clickedCell = [row, col];
+    let newPath: number[][];
     if (currentPath.length === 0) {
-      setCurrentPath([clickedCell]);
+      newPath = [clickedCell];
     } else {
       const lastCell = currentPath[currentPath.length - 1];
       const isSameAsLast = lastCell[0] === row && lastCell[1] === col;
@@ -79,17 +80,31 @@ export default function Game({ puzzle }: GameProps) {
 
       if (isSameAsLast) {
         // If the last cell is clicked again, remove it (backtrack)
-        setCurrentPath(prev => prev.slice(0, -1));
+        newPath = currentPath.slice(0, -1);
       } else if (indexOfClicked !== -1) {
         // If an earlier cell in the path is clicked, truncate the path to that point
-        setCurrentPath(prev => prev.slice(0, indexOfClicked + 1));
+        newPath = currentPath.slice(0, indexOfClicked + 1);
       } else if (isAdjacent) {
         // If adjacent and not already in path, add it
-        setCurrentPath(prev => [...prev, clickedCell]);
+        newPath = [...currentPath, clickedCell];
       } else {
         // Otherwise, start a new path
-        setCurrentPath([clickedCell]);
+        newPath = [clickedCell];
       }
+    }
+
+    // Check if new path matches any word
+    const pathStr = newPath.map(([r, c]) => `${r},${c}`).join(';')
+    const wordLetters = newPath.map(([r, c]) => grid[r][c]).join('')
+    const matchedWord = puzzle.words.find(word => {
+      const wordPathStr = word.path.map(([r, c]) => `${r},${c}`).join(';')
+      return pathStr === wordPathStr && wordLetters === word.display
+    })
+    if (matchedWord && !foundWords.has(matchedWord.key)) {
+      setFoundWords(prev => new Set([...prev, matchedWord.key]))
+      setCurrentPath([])
+    } else {
+      setCurrentPath(newPath)
     }
   };
 
@@ -174,9 +189,6 @@ export default function Game({ puzzle }: GameProps) {
             <span className="mr-2">Selecionado: {currentPath.map(([r, c]) => grid[r][c]).join('')}</span>
             <button onClick={handleClearPath} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-sm">
               Limpar
-            </button>
-            <button onClick={handleVerify} className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded text-sm ml-2">
-              Verificar
             </button>
           </div>
         )}
