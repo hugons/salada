@@ -1,0 +1,34 @@
+{
+  "id": "pares-001",
+  "title": "Pares de Palavras",
+  "theme": "pares",
+  "size": 4,
+  "grid": "LJOE\nAUVL\nSAOH\nAPSA",
+  "words": [
+    {
+      "key": "asas",
+      "display": "ASAS",
+      "path": [[3,0], [2,0], [2,1], [3,2]]
+    },
+    {
+      "key": "aspas",
+      "display": "ASPAS",
+      "path": [[3,0], [2,0], [3,1], [3,3], [3,2]]
+    },
+    {
+      "key": "joelhos",
+      "display": "JOELHOS",
+      "path": [[0,1], [0,2], [0,3], [1,3], [2,3], [2,2], [2,0]]
+    },
+    {
+      "key": "luvas",
+      "display": "LUVAS",
+      "path": [[1,3], [1,2], [1,1], [1,0], [2,0]]
+    },
+    {
+      "key": "olhos",
+      "display": "OLHOS",
+      "path": [[0,2], [1,3], [2,3], [2,2], [2,0]]
+    }
+  ]
+}
