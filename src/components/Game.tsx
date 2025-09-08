@@ -168,7 +168,6 @@ export default function Game({ puzzle }: GameProps) {
               key={`${r}-${c}`}
               className={`border cursor-pointer select-none transition-opacity duration-2000 ${
                 isInCurrentPath(r, c) ? 'bg-seafoam' : /* Use a more distinct blue for selected cells */
-                isInFoundPath(r, c) ? 'bg-sage' : /* Use a more distinct green for found cells */
                 'bg-cellbg' /* Use custom class for default cell background */
               } ${!isLetterVisible(r, c) ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
               onClick={(e) => { e.preventDefault(); handleClick(r, c); }}

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  font-family: theme('fontFamily.cairo');
+  font-family: theme('fontFamily.sans');
   background-color: theme('colors.bg');
 }
 

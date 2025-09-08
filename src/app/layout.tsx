@@ -1,12 +1,5 @@
 import type { Metadata } from 'next'
-import { Cairo } from 'next/font/google'
 import './globals.css'
-
-const cairo = Cairo({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   title: 'New Salad',
@@ -24,7 +17,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-PT" className={cairo.className}>
+    <html lang="pt-PT">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+      </head>
       <body>
         {children}
         <script src="/register-sw.js" defer></script>
