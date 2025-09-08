@@ -11,7 +11,6 @@ export default function Game({ puzzle }: GameProps) {
   const grid = puzzle.grid.split('\n').map(row => row.split(''))
   const [foundWords, setFoundWords] = useState<Set<string>>(new Set())
   const [currentPath, setCurrentPath] = useState<number[][]>([])
-  const [isDragging, setIsDragging] = useState(false)
   const [time, setTime] = useState(0)
   const [gameWon, setGameWon] = useState(false)
   const [bestTime, setBestTime] = useState<number | null>(null)
@@ -20,20 +19,8 @@ export default function Game({ puzzle }: GameProps) {
     const interval = setInterval(() => {
       setTime(t => t + 1)
     }, 1000)
-
-    const handleGlobalTouchMove = (e: TouchEvent) => {
-      if (isDragging) {
-        e.preventDefault()
-      }
-    }
-
-    document.addEventListener('touchmove', handleGlobalTouchMove, { passive: false })
-
-    return () => {
-      clearInterval(interval)
-      document.removeEventListener('touchmove', handleGlobalTouchMove)
-    }
-  }, [isDragging])
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     if (foundWords.size === puzzle.words.length) {
@@ -52,62 +39,7 @@ export default function Game({ puzzle }: GameProps) {
     }
   }, [puzzle.id])
 
-  const handleMouseDown = (e: React.MouseEvent, row: number, col: number) => {
-    e.preventDefault()
-    setIsDragging(true)
-    setCurrentPath([[row, col]])
-  }
-  const handleMouseEnter = (row: number, col: number) => {
-    if (isDragging) {
-      setCurrentPath(prev => [...prev, [row, col]])
-    }
-  }
 
-  const handleMouseUp = () => {
-    if (isDragging) {
-      // Check if path matches any word
-      const pathStr = currentPath.map(([r, c]) => `${r},${c}`).join(';')
-      const wordLetters = currentPath.map(([r, c]) => grid[r][c]).join('')
-      const matchedWord = puzzle.words.find(word => {
-        const wordPathStr = word.path.map(([r, c]) => `${r},${c}`).join(';')
-        return pathStr === wordPathStr && wordLetters === word.display
-      })
-      if (matchedWord && !foundWords.has(matchedWord.key)) {
-        setFoundWords(prev => new Set([...prev, matchedWord.key]))
-      }
-      setCurrentPath([])
-      setIsDragging(false)
-    }
-  }
-
-  const handleTouchStart = (e: React.TouchEvent, row: number, col: number) => {
-    e.preventDefault()
-    setIsDragging(true)
-    setCurrentPath([[row, col]])
-  }
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    e.preventDefault()
-    if (!isDragging) return
-    const touch = e.touches[0]
-    const element = document.elementFromPoint(touch.clientX, touch.clientY)
-    if (element && element.id) {
-      const [r, c] = element.id.split('-').map(Number)
-      if (!isNaN(r) && !isNaN(c)) {
-        setCurrentPath(prev => {
-          const last = prev[prev.length - 1]
-          if (last[0] !== r || last[1] !== c) {
-            return [...prev, [r, c]]
-          }
-          return prev
-        })
-      }
-    }
-  }
-
-  const handleTouchEnd = () => {
-    handleMouseUp()
-  }
 
   const isInCurrentPath = (row: number, col: number) => {
     return currentPath.some(([r, c]) => r === row && c === col)
@@ -136,6 +68,8 @@ export default function Game({ puzzle }: GameProps) {
   }
 
   const handleClick = (row: number, col: number) => {
+    console.log('Clicked:', row, col);
+    console.log('Current path before:', currentPath);
     const clickedCell = [row, col];
     if (currentPath.length === 0) {
       setCurrentPath([clickedCell]);
@@ -143,12 +77,20 @@ export default function Game({ puzzle }: GameProps) {
       const lastCell = currentPath[currentPath.length - 1];
       const isSameAsLast = lastCell[0] === row && lastCell[1] === col;
       const isAdjacent = Math.abs(row - lastCell[0]) <= 1 && Math.abs(col - lastCell[1]) <= 1;
-      const isAlreadyInPath = currentPath.some(([r, c]) => r === row && c === col);
+      const indexOfClicked = currentPath.findIndex(([r, c]) => r === row && c === col);
+
+      console.log('Last cell:', lastCell);
+      console.log('Is same as last:', isSameAsLast);
+      console.log('Is adjacent:', isAdjacent);
+      console.log('Index of clicked:', indexOfClicked);
 
       if (isSameAsLast) {
         // If the last cell is clicked again, remove it (backtrack)
         setCurrentPath(prev => prev.slice(0, -1));
-      } else if (isAdjacent && !isAlreadyInPath) {
+      } else if (indexOfClicked !== -1) {
+        // If an earlier cell in the path is clicked, truncate the path to that point
+        setCurrentPath(prev => prev.slice(0, indexOfClicked + 1));
+      } else if (isAdjacent) {
         // If adjacent and not already in path, add it
         setCurrentPath(prev => [...prev, clickedCell]);
       } else {
@@ -156,6 +98,7 @@ export default function Game({ puzzle }: GameProps) {
         setCurrentPath([clickedCell]);
       }
     }
+    console.log('Current path after:', currentPath);
   };
 
   const handleClearPath = () => {
@@ -224,13 +167,7 @@ export default function Game({ puzzle }: GameProps) {
                 isInFoundPath(r, c) ? 'bg-green-500' : /* Use a more distinct green for found cells */
                 'bg-d3d3d3' /* Use custom class for default cell background */
               } ${!isLetterVisible(r, c) ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-              onMouseDown={(e) => handleMouseDown(e, r, c)}
-              onMouseEnter={() => handleMouseEnter(r, c)}
-              onMouseUp={handleMouseUp}
-              onTouchStart={(e) => handleTouchStart(e, r, c)}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              onClick={() => handleClick(r, c)}
+              onClick={(e) => { e.preventDefault(); handleClick(r, c); }}
             >
               <span>{letter}</span>
             </div>
