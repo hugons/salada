@@ -141,25 +141,18 @@ export default function Game({ puzzle }: GameProps) {
       setCurrentPath([clickedCell]);
     } else {
       const lastCell = currentPath[currentPath.length - 1];
-      const isAdjacent = Math.abs(row - lastCell[0]) <= 1 && Math.abs(col - lastCell[1]) <= 1 && !(row === lastCell[0] && col === lastCell[1]);
+      const isSameAsLast = lastCell[0] === row && lastCell[1] === col;
+      const isAdjacent = Math.abs(row - lastCell[0]) <= 1 && Math.abs(col - lastCell[1]) <= 1;
       const isAlreadyInPath = currentPath.some(([r, c]) => r === row && c === col);
 
-      if (isAdjacent) {
-        if (isAlreadyInPath) {
-          // If it's the last cell, remove it (backtrack)
-          if (lastCell[0] === row && lastCell[1] === col) {
-            setCurrentPath(prev => prev.slice(0, -1));
-          } else {
-            // If an earlier cell in the path is clicked, truncate the path to that point
-            const index = currentPath.findIndex(([r, c]) => r === row && c === col);
-            setCurrentPath(prev => prev.slice(0, index + 1));
-          }
-        } else {
-          // Add to path if adjacent and not already in path
-          setCurrentPath(prev => [...prev, clickedCell]);
-        }
+      if (isSameAsLast) {
+        // If the last cell is clicked again, remove it (backtrack)
+        setCurrentPath(prev => prev.slice(0, -1));
+      } else if (isAdjacent && !isAlreadyInPath) {
+        // If adjacent and not already in path, add it
+        setCurrentPath(prev => [...prev, clickedCell]);
       } else {
-        // If not adjacent, start a new path
+        // Otherwise, start a new path
         setCurrentPath([clickedCell]);
       }
     }
