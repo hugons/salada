@@ -108,10 +108,6 @@ export default function Game({ puzzle }: GameProps) {
     }
   };
 
-  const handleClearPath = () => {
-    setCurrentPath([]);
-  };
-
   const handleVerify = () => {
     // Check if path matches any word
     const pathStr = currentPath.map(([r, c]) => `${r},${c}`).join(';')
@@ -183,16 +179,7 @@ export default function Game({ puzzle }: GameProps) {
         )}
         </div>
       </div>
-      <div className="mb-4">
-        {currentPath.length > 0 && (
-          <div className="mt-2 flex items-center">
-            <span className="mr-2">Selecionado: {currentPath.map(([r, c]) => grid[r][c]).join('')}</span>
-            <button onClick={handleClearPath} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-sm">
-              Limpar
-            </button>
-          </div>
-        )}
-      </div>
+
       <div className="mb-4">
         <h2 className="text-xl font-bold">Palavras:</h2>
         <div className="grid grid-cols-2 gap-2">
