@@ -1,17 +1,24 @@
-# Salada
+# Salada — O Jogo de Palavras
 
-Um repositório focado na centralização, organização e mistura de utilitários, scripts ou componentes reutilizáveis para otimização de fluxos de trabalho digitais.
+Uma experiência de jogo interativa e desafiante onde o objetivo é descobrir palavras escondidas numa grelha de letras.
 
 ## 🚀 Funcionalidades
 
-* **Modularidade:** Estrutura flexível criada para agrupar diferentes ferramentas de forma organizada.
-* **Foco em Eficiência:** Desenvolvido para servir como uma biblioteca rápida de consulta e reutilização de código.
-* **Integração Simples:** Componentes fáceis de isolar e implementar noutros ambientes ou projetos ativos.
+* **Quebra-Cabeças de Palavras:** Desafia o teu vocabulário encontrando palavras relacionadas com diversos temas numa grelha de letras baralhadas.
+* **Mecânicas de Progressão:** Inclui contadores de tempo para desafiar a tua rapidez, além de indicar o número de letras das palavras que faltam descobrir.
+* **Sistema de Dicas:** Integra um botão de ajuda para aqueles momentos mais difíceis, melhorando a jogabilidade e acessibilidade.
+* **Interface Clean & Intuitiva:** Desenvolvido com foco no design de interface (UI) e na experiência do utilizador (UX) para uma navegação fluida e envolvente.
+
+## 🔗 Jogar em Tempo Real
+
+O jogo está disponível e pronto a jogar através do seguinte link:
+
+👉 [salada-two.vercel.app](https://salada-two.vercel.app)
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **Markdown:** Para documentação e mapeamento de processos.
-* **JavaScript / HTML / CSS:** Consoante os utilitários e lógicas de automação integrados no repositório.
+* **React / Next.js / Tailwind CSS:** Desenvolvido recorrendo às melhores práticas modernas de front-end para garantir reatividade e um design totalmente adaptável a computadores e dispositivos móveis.
+* **Gestão de Estado Complexo:** Lógica estruturada para controlo de tempo, deteção de palavras corretas, pontuação e estado do jogo.
 
 ## 📦 Como Executar o Projeto Localmente
 
@@ -31,9 +38,9 @@ Navegue para o diretório que acabou de ser criado:
 cd salada
 ```
 
-### Passo 3: Exploração
+### Passo 3: Executar
 
-Explore os scripts ou ficheiros disponíveis e integre-os no seu fluxo de trabalho local ou ambiente de desenvolvimento.
+Instale as dependências locais e inicie o servidor de desenvolvimento para rodar o jogo localmente no seu browser.
 
 ---
 
